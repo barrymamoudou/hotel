@@ -15,6 +15,7 @@ export class HotelListComponent implements OnInit {
     description:'belle vue',
     price:203.4,
     imageURL:'assets/img/hotel-room.jpg',
+    rating:5
   },
   {
     hotelId:2,
@@ -22,6 +23,7 @@ export class HotelListComponent implements OnInit {
     description:'service',
     price:150.4,
     imageURL:'assets/img/indoors.jpg',
+    rating:4
   },
   {
     hotelId:3,
@@ -29,17 +31,20 @@ export class HotelListComponent implements OnInit {
     description:'the service',
     price:500.4,
     imageURL:'assets/img/hotel-room.jpg',
+    rating:2.6
   },
   {
     hotelId:4,
     hotelName:'bleua',
     description:'belle vue',
     price:405.4,
-    imageURL:'assets/img/window.jpg'
+    imageURL:'assets/img/window.jpg',
+    rating:3
   }
 ]
-public _hotelfiltre='mot'
+public _hotelfiltre=''
 public filtered:IHotel[]=[]
+public receivedRating!:string
 
   constructor() { }
 
@@ -71,5 +76,8 @@ public filtered:IHotel[]=[]
       (hotel:IHotel)=>hotel.hotelName.toLocaleLowerCase().indexOf(word) != -1
     )
     return res;
+  }
+  public receiveRatingClicked(message :string){
+    this.receivedRating=message
   }
 }
