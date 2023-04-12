@@ -12,7 +12,7 @@ export class StarRatingComponent implements OnInit {
   @Input()
 
   public rating :number=2;
-@Output()
+  @Output()
   public starRatingCliked : EventEmitter<string> =new EventEmitter<string>();
 
 

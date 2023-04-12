@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IHotel } from './IHotel';
+import { ListHotelService } from './list-hotel.service';
 
 @Component({
   selector: 'app-hotel-list',
@@ -9,47 +10,26 @@ import { IHotel } from './IHotel';
 export class HotelListComponent implements OnInit {
   public title="Liste des Hotels"
   public showBadge: boolean = false;
-  public hotels:IHotel[]=[{
-    hotelId:1,
-    hotelName:'bleua',
-    description:'belle vue',
-    price:203.4,
-    imageURL:'assets/img/hotel-room.jpg',
-    rating:5
-  },
-  {
-    hotelId:2,
-    hotelName:'Service',
-    description:'service',
-    price:150.4,
-    imageURL:'assets/img/indoors.jpg',
-    rating:4
-  },
-  {
-    hotelId:3,
-    hotelName:'bleua',
-    description:'the service',
-    price:500.4,
-    imageURL:'assets/img/hotel-room.jpg',
-    rating:2.6
-  },
-  {
-    hotelId:4,
-    hotelName:'bleua',
-    description:'belle vue',
-    price:405.4,
-    imageURL:'assets/img/window.jpg',
-    rating:3
-  }
-]
-public _hotelfiltre=''
-public filtered:IHotel[]=[]
-public receivedRating!:string
+  public hotels:IHotel[]=[]
+  public _hotelfiltre=''
+  public filtered:IHotel[]=[]
+  public receivedRating!:string
+  private errMess !:string
 
-  constructor() { }
+  constructor(private hotelliste:ListHotelService) { }
 
   ngOnInit(): void {
-    this.filtered=this.hotels;
+     this.hotelliste.getHotel().subscribe({
+      next:hotels=>{
+        this.hotels=hotels
+        this.filtered=this.hotels;
+      },
+      error:err=>this.errMess=err
+     })
+
+
+
+
   }
   public getDate(){
     return new Date()
