@@ -14,6 +14,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { RouterModule } from '@angular/router';
 import { HotelDetailComponent } from './hotel-list/hotel-detail/hotel-detail.component';
+import { HotelDetailGuard } from './hotel-list/hotel-detail.guard';
 
 registerLocaleData(localeFr,fr)
 @NgModule({
@@ -23,6 +24,7 @@ registerLocaleData(localeFr,fr)
     ReplaceComma,
     StarRatingComponent,
     HomeComponent,
+    HotelDetailComponent
 
   ],
   imports: [
@@ -35,7 +37,7 @@ registerLocaleData(localeFr,fr)
 
      { path:'home',component:HomeComponent },
      { path:'', redirectTo:'home',pathMatch:'full' },
-     { path:'hotels/:id',component:HotelDetailComponent },
+     { path:'hotels/:id',component:HotelDetailComponent,canActivate:[HotelDetailGuard] },
      { path:'hotels',component:HotelListComponent },
      { path:'**', redirectTo: 'home',pathMatch:'full'},
 

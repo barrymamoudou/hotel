@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ListHotelService } from '../list-hotel.service';
 import { IHotel } from '../IHotel';
 
@@ -10,20 +10,21 @@ import { IHotel } from '../IHotel';
 })
 export class HotelDetailComponent implements OnInit {
 
-  public hotels:IHotel= <IHotel>{};
-  hotel: IHotel | undefined;
+  public hotel:IHotel= <IHotel>{};
 
-  constructor( private route:ActivatedRoute, private hotelService:ListHotelService) { }
+
+  constructor( private route:ActivatedRoute, private hotelService:ListHotelService, private router:Router) { }
 
   ngOnInit(): void {
       const id:number=+this.route.snapshot.paramMap.get('id')!
       this.hotelService.getHotel().subscribe((hotels:IHotel[])=>{
-      this.hotel=hotels.find(hotel => hotel.hotelId===id)
+      this.hotel=hotels.find(hotel => hotel.hotelId===id)!
       console.log('hotel',this.hotel);
     })
 
-
-
+  }
+  public BackToList():void {
+    this.router.navigate(['/hotels']);
   }
 
 }
