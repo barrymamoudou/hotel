@@ -6,13 +6,15 @@ import { HotelListComponent } from './hotel-list/hotel-list.component';
 import { HotelDetailGuard } from './shared/guards/hotel-detail.guard';
 import { SharedModule } from '../shared/shared.module';
 import { HotelRoutingModule } from './hotel-routing.module';
+import { HotelEditComponent } from './hotel-edit/hotel-edit.component';
 
 
 
 @NgModule({
   declarations: [
     HotelListComponent,
-    HotelDetailComponent
+    HotelDetailComponent,
+    HotelEditComponent
   ],
   imports: [
 
